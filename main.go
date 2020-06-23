@@ -1,0 +1,21 @@
+package main
+
+import (
+	"DNSCheck/router"
+
+	"github.com/gin-gonic/gin"
+)
+
+//For testing the API in local machine GET:[http://localhost:3000/dns/{url}]
+func main() {
+	r := gin.Default()
+
+	r.Use(func(c *gin.Context) {
+		c.Next()
+	})
+
+	router.InitializeDNSRoutes(r)
+
+	// Run the server
+	r.Run(":3000")
+}

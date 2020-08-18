@@ -73,9 +73,11 @@ func FindDNS(c *gin.Context) {
 
 	go FindIP(encodedURL, &wg)
 
+	// Channel for experimental purpose
 	cCName := make(chan string)
 	go FindCName(encodedURL, cCName)
 	dns.Cname = <-cCName
+	close(cCName)
 
 	go FindNS(encodedURL, &wg)
 

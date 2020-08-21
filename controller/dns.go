@@ -37,7 +37,7 @@ func FindNS(url string, wg *sync.WaitGroup) {
 
 	nameserver, _ := net.LookupNS(url)
 	for _, ns := range nameserver {
-		dns.NS = append(dns.NS, *&ns.Host)
+		dns.NS = append(dns.NS, ns.Host)
 	}
 }
 

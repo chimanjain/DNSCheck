@@ -19,6 +19,7 @@ func FindIP(url string, wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	iprecords, _ := net.LookupIP(url)
+	dns.IPAddress = nil
 	for _, ip := range iprecords {
 		dns.IPAddress = append(dns.IPAddress, ip)
 	}
@@ -36,6 +37,7 @@ func FindNS(url string, wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	nameserver, _ := net.LookupNS(url)
+	dns.NS = nil
 	for _, ns := range nameserver {
 		dns.NS = append(dns.NS, ns.Host)
 	}
@@ -46,6 +48,7 @@ func FindMX(url string, wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	mxrecords, _ := net.LookupMX(url)
+	dns.MX = nil
 	for _, mx := range mxrecords {
 		mxEntity.Host, mxEntity.Pref = mx.Host, mx.Pref
 		dns.MX = append(dns.MX, mxEntity)
@@ -57,6 +60,7 @@ func FindTXT(url string, wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	txtrecords, _ := net.LookupTXT(url)
+	dns.TXT = nil
 	for _, txt := range txtrecords {
 		dns.TXT = append(dns.TXT, txt)
 	}

@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// InitializeDNSRoutes initializes the router for blog api
+// InitializeDNSRoutes initializes the router for DNS Checkup api
 func InitializeDNSRoutes(r *gin.Engine) {
 
 	// Routes

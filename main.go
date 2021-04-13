@@ -10,10 +10,6 @@ import (
 func main() {
 	r := gin.Default()
 
-	r.Use(func(c *gin.Context) {
-		c.Next()
-	})
-
 	router.InitializeDNSRoutes(r)
 
 	// Run the server

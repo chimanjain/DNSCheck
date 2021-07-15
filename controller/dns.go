@@ -10,19 +10,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var mxEntity model.MxEntity
-
-var dns model.Dns
+var (
+	mxEntity model.MxEntity
+	dns      model.Dns
+	wg       sync.WaitGroup
+)
 
 //FindIP Fetches the IP records
 func FindIP(url string, wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	iprecords, _ := net.LookupIP(url)
-	dns.IPAddress = nil
-	for _, ip := range iprecords {
-		dns.IPAddress = append(dns.IPAddress, ip)
-	}
+	dns.IPAddress = append(dns.IPAddress, iprecords...)
 }
 
 //FindCName Fetches the CName records
@@ -37,7 +36,6 @@ func FindNS(url string, wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	nameserver, _ := net.LookupNS(url)
-	dns.NS = nil
 	for _, ns := range nameserver {
 		dns.NS = append(dns.NS, ns.Host)
 	}
@@ -48,7 +46,6 @@ func FindMX(url string, wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	mxrecords, _ := net.LookupMX(url)
-	dns.MX = nil
 	for _, mx := range mxrecords {
 		mxEntity.Host, mxEntity.Pref = mx.Host, mx.Pref
 		dns.MX = append(dns.MX, mxEntity)
@@ -60,17 +57,11 @@ func FindTXT(url string, wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	txtrecords, _ := net.LookupTXT(url)
-	dns.TXT = nil
-	for _, txt := range txtrecords {
-		dns.TXT = append(dns.TXT, txt)
-	}
+	dns.TXT = append(dns.TXT, txtrecords...)
 }
 
 //FindDNS function is used for fetching the IP, CName, NS, MX and TXT records of the URL
 func FindDNS(c *gin.Context) {
-
-	var wg sync.WaitGroup
-
 	wg.Add(4)
 	encodedURL := url.QueryEscape(c.Param("url"))
 	dns.URL = c.Param("url")

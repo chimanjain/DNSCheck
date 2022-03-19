@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"DNSCheck/model"
+	"dnscheck/model"
 	"net"
 	"net/http"
 	"net/url"

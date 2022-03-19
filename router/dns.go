@@ -1,7 +1,7 @@
 package router
 
 import (
-	"DNSCheck/controller"
+	"dnscheck/controller"
 
 	"github.com/gin-gonic/gin"
 )

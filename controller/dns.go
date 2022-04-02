@@ -1,11 +1,12 @@
 package controller
 
 import (
-	"dnscheck/model"
 	"net"
 	"net/http"
 	"net/url"
 	"sync"
+
+	"github.com/chimanjain/dnscheck/model"
 
 	"github.com/gin-gonic/gin"
 )

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"dnscheck/router"
+	"github.com/chimanjain/dnscheck/router"
 
 	"github.com/gin-gonic/gin"
 )

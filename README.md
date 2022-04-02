@@ -18,7 +18,7 @@ docker build --rm -t dnscheck .
 docker run -p 3000:3000 --name dnscheck-server dnscheck
 ```
 
-### Use the cURL commands below to interact with the endpoint
+## Use the cURL commands below to interact with the endpoint
 
 ```sh
 curl "http://localhost:3000/dns/{url-to-query}"

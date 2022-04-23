@@ -14,8 +14,7 @@ go run main.go
 ### To run on docker
 
 ```sh
-docker build --rm -t dnscheck .
-docker run -p 3000:3000 --name dnscheck-server dnscheck
+docker-compose up
 ```
 
 ## Use the cURL commands below to interact with the endpoint

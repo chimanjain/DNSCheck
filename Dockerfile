@@ -6,6 +6,9 @@ FROM golang:1.18 as build-env
 ENV APP_NAME dnscheck
 ENV CMD_PATH main.go
 
+# Add Maintainer Info
+LABEL maintainer="Chiman Jain <chimanjain15@gmail.com>"
+
 # Copy application data into image
 COPY . $GOPATH/src/$APP_NAME
 WORKDIR $GOPATH/src/$APP_NAME

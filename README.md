@@ -9,14 +9,6 @@
 
 ## How to run
 
-### To run it locally
-
-```sh
-go run main.go
-```
-
-### To run on docker
-
 ```sh
 docker-compose up
 ```

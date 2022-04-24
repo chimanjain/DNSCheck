@@ -1,12 +1,17 @@
 package controller
 
 import (
+	"context"
+	"fmt"
+	"log"
 	"net"
 	"net/http"
 	"net/url"
 	"sync"
 
+	"github.com/chimanjain/dnscheck/cache"
 	"github.com/chimanjain/dnscheck/model"
+	"github.com/go-redis/redis/v8"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,6 +21,8 @@ var (
 	dns      model.Dns
 	wg       sync.WaitGroup
 )
+
+var ctx = context.Background()
 
 //FindIP Fetches the IP records
 func FindIP(url string, wg *sync.WaitGroup) {
@@ -63,9 +70,19 @@ func FindTXT(url string, wg *sync.WaitGroup) {
 
 //FindDNS function is used for fetching the IP, CName, NS, MX and TXT records of the URL
 func FindDNS(c *gin.Context) {
-	wg.Add(4)
 	encodedURL := url.QueryEscape(c.Param("url"))
-	dns.URL = c.Param("url")
+	redisClient := cache.GetRedisClient()
+	val, err := redisClient.GetDNS(ctx, encodedURL)
+	if err == redis.Nil {
+		fmt.Println(encodedURL, " record does not exist")
+	}
+	if val.URL != "" {
+		c.JSON(http.StatusOK, val)
+		return
+	}
+
+	wg.Add(4)
+	dns.URL = encodedURL
 
 	go FindIP(encodedURL, &wg)
 
@@ -83,5 +100,9 @@ func FindDNS(c *gin.Context) {
 
 	wg.Wait()
 
-	c.JSON(http.StatusOK, gin.H{"data": dns})
+	err = redisClient.SetDNS(ctx, dns)
+	if err != nil {
+		log.Println(err)
+	}
+	c.JSON(http.StatusOK, dns)
 }

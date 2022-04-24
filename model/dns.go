@@ -3,12 +3,12 @@ package model
 import "net"
 
 type Dns struct {
-	URL       string `json:"url" gorm:"primary_key"`
-	IPAddress []net.IP
-	Cname     string
-	NS        []string
-	MX        []MxEntity
-	TXT       []string
+	URL       string     `json:"url"`
+	IPAddress []net.IP   `json:"IPAddress"`
+	Cname     string     `json:"Cname"`
+	NS        []string   `json:"NS"`
+	MX        []MxEntity `json:"MX"`
+	TXT       []string   `json:"TXT"`
 }
 
 type MxEntity struct {

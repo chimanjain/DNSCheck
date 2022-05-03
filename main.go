@@ -10,10 +10,4 @@ func main() {
 	app := fiber.New()
 	router.InitializeDNSRoutes(app)
 	app.Listen(":3000")
-	// r := gin.Default()
-
-	// router.InitializeDNSRoutes(r)
-
-	// // Run the server
-	// r.Run(":3000")
 }

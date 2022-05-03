@@ -2,14 +2,13 @@ package router
 
 import (
 	"github.com/chimanjain/dnscheck/controller"
-
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
 )
 
 // InitializeDNSRoutes initializes the router for DNS Checkup api
-func InitializeDNSRoutes(r *gin.Engine) {
+func InitializeDNSRoutes(app *fiber.App) {
 
 	// Routes
-	r.GET("/dns/:url", controller.FindDNS)
+	app.Get("/dns/:url", controller.GetDNS)
 
 }

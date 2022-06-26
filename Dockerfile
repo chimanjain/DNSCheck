@@ -6,7 +6,7 @@ FROM golang:1.18 as build-env
 ENV APP_NAME dnscheck
 ENV CMD_PATH main.go
 
-# Add Maintainer Info
+# Maintainer Info
 LABEL maintainer="Chiman Jain <chimanjain15@gmail.com>"
 
 # Copy application data into image
@@ -14,10 +14,10 @@ COPY . $GOPATH/src/$APP_NAME
 WORKDIR $GOPATH/src/$APP_NAME
 
 # Build application
-RUN CGO_ENABLED=0 go build -v -o /$APP_NAME $GOPATH/src/$APP_NAME/$CMD_PATH
+RUN CGO_ENABLED=0 go build -o /$APP_NAME $GOPATH/src/$APP_NAME/$CMD_PATH
 
 # Run Stage
-FROM alpine:3.15
+FROM alpine:3.16
 
 # Set envirment variable
 ENV APP_NAME dnscheck

@@ -1,6 +1,6 @@
 # Build Stage
 # First pull Golang image
-FROM golang:1.18 as build-env
+FROM golang:1.19-alpine as build-env
 
 # Set envirment variable
 ENV APP_NAME dnscheck
@@ -17,7 +17,7 @@ WORKDIR $GOPATH/src/$APP_NAME
 RUN CGO_ENABLED=0 go build -o /$APP_NAME $GOPATH/src/$APP_NAME/$CMD_PATH
 
 # Run Stage
-FROM alpine:3.16
+FROM alpine
 
 # Set envirment variable
 ENV APP_NAME dnscheck

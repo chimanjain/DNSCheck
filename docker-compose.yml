@@ -16,7 +16,7 @@ services:
       - REDIS_URL=redis:6379
 
   redis:
-    image: redis:7.0-alpine
+    image: redis:7-alpine
     ports:
       - "6379:6379"
     restart: always

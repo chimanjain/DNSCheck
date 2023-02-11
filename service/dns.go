@@ -9,7 +9,7 @@ import (
 
 	"github.com/chimanjain/dnscheck/cache"
 	"github.com/chimanjain/dnscheck/model"
-	"github.com/go-redis/redis/v8"
+	"github.com/redis/go-redis/v9"
 )
 
 var (
@@ -20,7 +20,7 @@ var (
 
 var ctx = context.Background()
 
-//FindIP Fetches the IP records
+// FindIP Fetches the IP records
 func FindIP(url string, wg *sync.WaitGroup) {
 	defer wg.Done()
 
@@ -28,14 +28,14 @@ func FindIP(url string, wg *sync.WaitGroup) {
 	dns.IPAddress = append(dns.IPAddress, iprecords...)
 }
 
-//FindCName Fetches the CName records
+// FindCName Fetches the CName records
 func FindCName(url string, cCName chan string) {
 
 	cname, _ := net.LookupCNAME(url)
 	cCName <- cname
 }
 
-//FindNS Fetches the NS records
+// FindNS Fetches the NS records
 func FindNS(url string, wg *sync.WaitGroup) {
 	defer wg.Done()
 
@@ -45,7 +45,7 @@ func FindNS(url string, wg *sync.WaitGroup) {
 	}
 }
 
-//FindMX Fetches the MX records
+// FindMX Fetches the MX records
 func FindMX(url string, wg *sync.WaitGroup) {
 	defer wg.Done()
 
@@ -56,7 +56,7 @@ func FindMX(url string, wg *sync.WaitGroup) {
 	}
 }
 
-//FindTXT Fetches the TXT records
+// FindTXT Fetches the TXT records
 func FindTXT(url string, wg *sync.WaitGroup) {
 	defer wg.Done()
 

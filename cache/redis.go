@@ -8,7 +8,7 @@ import (
 	"sync"
 
 	"github.com/chimanjain/dnscheck/model"
-	"github.com/go-redis/redis/v8"
+	"github.com/redis/go-redis/v9"
 )
 
 var once sync.Once

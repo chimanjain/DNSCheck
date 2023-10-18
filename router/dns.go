@@ -7,8 +7,6 @@ import (
 
 // InitializeDNSRoutes initializes the router for DNS Checkup api
 func InitializeDNSRoutes(app *fiber.App) {
-
 	// Routes
 	app.Get("/dns/:url", controller.GetDNS)
-
 }

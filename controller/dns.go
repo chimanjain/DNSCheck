@@ -9,7 +9,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-//FindDNS function is used for fetching the IP, CName, NS, MX and TXT records of the URL
+// FindDNS function is used for fetching the IP, CName, NS, MX and TXT records of the URL
 func GetDNS(c *fiber.Ctx) error {
 	encodedURL := url.QueryEscape(strings.TrimSpace(c.Params("url")))
 	dnsresp := service.FetchDNS(encodedURL)

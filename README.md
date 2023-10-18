@@ -10,7 +10,7 @@
 ## How to run
 
 ```sh
-docker-compose up
+docker compose up
 ```
 
 ## Use the cURL commands below to interact with the endpoint

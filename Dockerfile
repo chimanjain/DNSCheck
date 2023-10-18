@@ -1,6 +1,6 @@
 # Build Stage
 # First pull Golang image
-FROM golang:1.20-alpine as build-env
+FROM golang:1.21-alpine as build-env
 
 # Set envirment variable
 ENV APP_NAME dnscheck
@@ -14,7 +14,7 @@ COPY . $GOPATH/src/$APP_NAME
 WORKDIR $GOPATH/src/$APP_NAME
 
 # Build application
-RUN CGO_ENABLED=0 go build -o /$APP_NAME $GOPATH/src/$APP_NAME/$CMD_PATH
+RUN CGO_ENABLED=0 go build -ldflags "-s -w" -o /$APP_NAME $GOPATH/src/$APP_NAME/$CMD_PATH
 
 # Run Stage
 FROM alpine

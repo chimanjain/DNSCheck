@@ -1,6 +1,6 @@
 # Build Stage
 # First pull Golang image
-FROM golang:1.23-alpine as build-env
+FROM golang:1.24-alpine as build-env
 
 # Set envirment variable
 ENV APP_NAME dnscheck

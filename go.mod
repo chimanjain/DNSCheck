@@ -3,7 +3,7 @@ module github.com/chimanjain/dnscheck
 go 1.25
 
 require (
-	github.com/gofiber/fiber/v2 v2.52.9
+	github.com/gofiber/fiber/v2 v2.52.11
 	github.com/redis/go-redis/v9 v9.12.1
 )
 

@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/chimanjain/dnscheck/controller"
-	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v3"
 )
 
 // InitializeDNSRoutes initializes the router for DNS Checkup api

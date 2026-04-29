@@ -1,22 +1,30 @@
-# Define services
 services:
 
   # App Service
   app:
-    # Configuration for building the docker image for the service
+  # Configuration for building the docker image for the service
+    container_name: dnscheck-app
     build:
       context: . # Use an image built from the specified dockerfile in the current directory.
       dockerfile: Dockerfile
     ports:
-      - "3000:3000" # Forward the exposed port 3000 on the container to port 3000 on the host machine
-    restart: always
-    links:
-      - redis
+      - "3000:3000"
     environment:
       - REDIS_URL=redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: always
 
+  # Redis Cache Service
   redis:
+    container_name: dnscheck-redis
     image: redis:8-alpine
     ports:
       - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
     restart: always

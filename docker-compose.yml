@@ -19,7 +19,7 @@ services:
   # Redis Cache Service
   redis:
     container_name: dnscheck-redis
-    image: redis:8-alpine
+    image: docker.io/library/redis:8-alpine
     ports:
       - "6379:6379"
     healthcheck:

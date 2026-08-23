@@ -1,5 +1,5 @@
 # Build Stage
-FROM golang:1.26-alpine AS build-env
+FROM docker.io/library/golang:1.27-alpine AS build-env
 
 # Set environment variables
 ENV APP_NAME=dnscheck
